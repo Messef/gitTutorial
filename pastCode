@@ -1,0 +1,15 @@
+import random
+nums = ["1", "2", "3", "4"]
+def myNums():
+  i=0
+  y=random.randrange(4)
+  print("I love the number " + nums[y])
+  for x in nums:
+   print("But I like the number "+ nums[i] + " too!")
+   x="5"
+   nums.append(x)
+   i = i+1
+   if nums[i]==x: break
+   if int(nums[i])==int(nums[y]): continue 
+  else: print("I love math and numbers!!!")
+myNums()
