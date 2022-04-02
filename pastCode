@@ -5,11 +5,60 @@ def myNums():
   y=random.randrange(4)
   print("I love the number " + nums[y])
   for x in nums:
-   print("But I like the number "+ nums[i] + " too!")
+   if int(nums[i])!=int(nums[y]): 
+       print("But I like the number "+ nums[i] + " too!")
+   i = i+1
    x="5"
    nums.append(x)
-   i = i+1
    if nums[i]==x: break
-   if int(nums[i])==int(nums[y]): continue 
   else: print("I love math and numbers!!!")
 myNums()
+
+from random import randint
+
+y=input("What is that maximum number in this range: ")
+N = 2
+scores = [0] * N
+def restartGame():
+    v=input("Type 'Again' to play again: ")
+    if v=="Again":
+        theGame()
+    elif v=="Leaderboard":
+        print("Player 1 has " + str(scores[0]) + " and Player 2 has " + str(scores[1]) + "!")
+        v=input('Type "Again" to play again: ')
+    elif v=="Change":
+       y=input("What is that maximum number in this range: ")
+       theGame(y)
+       
+def theGame(y):
+    x=randint(1,y)
+    player1=input("Player 1, please put your guess(1-10) here: ")
+    player2=input("Player 2, please put your guess(1-10) here: ")
+    y=abs(int(x)-int(player1))
+    z=abs(int(x)-int(player2))
+    if y<z:
+        print("Player 1 has won! The number was "+str(x))
+        scores[0]+=1
+        restartGame()
+    elif y>z:
+        print("Player 2 has won! The number is " +str(x))
+        scores[1]+=1
+        restartGame()
+    elif player1==player2:
+        print("You can't do that! Please start again and enter a DIFFERENT number this time :)")
+    elif z==y:
+        print("It's a tie!")
+        theGame()
+    elif type(player1) != int or type(player2) !=  int:
+        print("There is a syntax error. Please try again")
+theGame(y)
+integer=1
+def myFunc():
+  global integer
+  if integer>1: print("This function has run " + str(counter)+ " times!")
+  else: print("This function has run " + str(integer)+ " time!")
+  integer=integer+1
+  x=input("Again y/n: ")
+  if x=="y": myFunc()
+  else: quit()
+myFunc()
