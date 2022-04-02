@@ -17,30 +17,32 @@ total=0
 class Dice1(Dice):
   def __init__(dice):
    dice.target=randint(5, 15)
+  
   def game(dice):
-     global counter
-     global total
-     x=int(input("Pick a number from 1-5: "))
-     if x!=1 and x!=2 and x!=3 and x!=4 and x!=5:
+    confirm=input("Welcome to this game! This is a varation of blackjack where instead of trying to get to 21, it's a random number from 5-15! Type \"yes\" to play! ")
+    if confirm=="yes" or confirm=="Yes":
+     def myFunc():
+      global counter
+      global total
+      x=int(input("Pick a number from 1-5: "))
+      if x!=1 and x!=2 and x!=3 and x!=4 and x!=5:
         quit()
-     elif counter==2:
+      elif counter==2:
          total=total+x
          if total>dice.target:
           print("You lost")
-          print(5)   
-          print(total)
-          print(dice.target)
+          print(f"Your total is: {total}")
+          print(f"The number was {dice.target}")
          elif total<dice.target:
           score=dice.target-total
-          print(score)
-          print(4)
-          print(dice.target)
-     else:
+          print(f"Your score is: {score}")
+          print(f"The number is {dice.target}")
+      else:
         total=total+x
         counter=counter+1
-        print(3)
-        print(total)
-        print(counter)
-        Dice1.game(dice)
+        print(f"Your total is {total}")
+        print(f"Here is number of times you guessed: {counter}")
+        myFunc()
+     myFunc()
 me=Dice1()
 me.game()
