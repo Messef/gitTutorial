@@ -1,48 +1,58 @@
+#WORDLE
 from random import randint
-class Dice:
-  def __init__(self, sides):
-    self.sides=sides
-  def roll(self):
-    z=input("Play? ")
-    while z=="yes" or z=="Yes":
-     y=input("Pick the number of sides: ")
-     self.sides=y
-     x=randint(1,int(self.sides))
-     print("The dices says " + str(x) +"! The number of sides is " + str(y))
-     z=input("Continue? ")
-    else:
-     quit()
+wordle= [ "rebut","trope", "cobra", "adieu", "storm", "arise", "awake", "sleep", "snake", "couch", "chair", "phone"]
+word=randint(0,12)
+z=wordle[word]
 counter=0
-total=0
-class Dice1(Dice):
-  def __init__(dice):
-   dice.target=randint(5, 15)
+iterator=0
+print("Welcome to Worldle! For each letter you guess it will throw a \"y\" or \"n\". An \"n\" means that for that for that specific letter in that word, the letter is incorrect. For example, if you guess \"phone\" and the word is \"trope\", the program will throw this: \n p, n \n h, n \n o, y \n n, n \n e, y \n Thus, despite there being an \"p\" in trope, the program isn't sophisticated enough to see that there is a p in the letter, just not in the position guessed. A \"y\" means that that letter is 100% right.  ")
+def myFunc():
   
-  def game(dice):
-    confirm=input("Welcome to this game! This is a varation of blackjack where instead of trying to get to 21, it's a random number from 5-15! Type \"yes\" to play! ")
-    if confirm=="yes" or confirm=="Yes":
-     def myFunc():
-      global counter
-      global total
-      x=int(input("Pick a number from 1-5: "))
-      if x!=1 and x!=2 and x!=3 and x!=4 and x!=5:
-        quit()
-      elif counter==2:
-         total=total+x
-         if total>dice.target:
-          print("You lost")
-          print(f"Your total is: {total}")
-          print(f"The number was {dice.target}")
-         elif total<dice.target:
-          score=dice.target-total
-          print(f"Your score is: {score}")
-          print(f"The number is {dice.target}")
-      else:
-        total=total+x
-        counter=counter+1
-        print(f"Your total is {total}")
-        print(f"Here is number of times you guessed: {counter}")
-        myFunc()
-     myFunc()
-me=Dice1()
-me.game()
+  global counter
+  global iterator
+  iterator=0
+  while counter<5:
+   guess=input("Put a five letter word here: ")
+   guess=guess.lower()
+   if len(guess)!=5:
+    print("invalid guess, start again")
+   else:
+    def wordle():
+     global counter
+     global iterator
+     while iterator<5:
+      if z[iterator]==guess[iterator]:
+        
+        print(f"{guess[iterator]}, y")
+        iterator+=1
+        if iterator==4:
+          if z[iterator]==guess[iterator]:
+           print(f"{guess[iterator]}, y")
+           myFunc()
+           counter+=1
+           iterator+=1
+          elif z[iterator]!=guess[iterator]:
+           print(f"{guess[iterator]}, n")
+           myFunc()
+           counter+=1
+           iterator+=1
+        else:
+          wordle()
+      elif z[iterator]!=guess[iterator]:
+        print(f"{guess[iterator]}, n")
+        iterator+=1
+        if iterator==4:
+          if z[iterator]==guess[iterator]:
+           print(f"{guess[iterator]}, y")
+           iterator+=1
+           counter+=1
+           myFunc()
+          elif z[iterator]!=guess[iterator]:
+           print(f"{guess[iterator]}, n")
+           iterator+=1
+           counter+=1
+           myFunc()
+        else:
+          wordle()
+    wordle()      
+myFunc()
